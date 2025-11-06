@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="static/sms.js"></script>
+
+<div class="report-table">
+<h1>Reportistica invio SMS</h1>
+<table>
+    <thead class="thead-dark">
+        <tr>
+          <th scope="col">Inviato</th>
+          <th scope="col">Numero di telefono</th>
+          <th scope="col">Data</th>
+          <th scope="col">Errori nell'invio</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for sms in items %}
+    <tr onclick="openDialog({{sms.id}},'{{ sms.content.replace('\n', '<br>')|safe }}')">
+        <td><div class="sms-icon {{"sms-failed" if sms["sent"]==True else "sms-success"}}"></div></td>
+        <td><span>{{sms.phonenumber}}</span></td>
+        <td><span>{{sms.insert_date}}</span></td>
+        <td><span>{{sms.error}}</span></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+<dialog id="dialog-1">
+    <h3><center>Contenuto SMS</center></h3>
+    <p id="sms-content"></p>
+    <button class="cancel closeDialog">Annulla</button>
+    <button id="submit" class="submit">Reinvia</button>
+</dialog>
+{% include "_pagination.html" %}
+{% endblock content %}

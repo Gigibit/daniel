@@ -1,0 +1,20 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "xp"
+      REGION: "it-IT"
+      KEYBOARD: "it-IT"
+      KVM : "N"
+    volumes:
+      - /var/win10:/storage
+#    devices:
+ #     - /dev/kvm:/dev/kvm
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    stop_grace_period: 2m

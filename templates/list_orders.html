@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="static/orders.js"></script>
+
+<div class="report-table">
+<h1>Reportistica Ordini</h1>
+<table>
+    <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nome cliente</th>
+          <th scope="col">Numero di telefono</th>
+          <th scope="col">Data</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in items %}
+    <tr onclick="openDialog('{{ order.id}}',
+                            '{{ order.phonenumber|safe }}', 
+                            '{{ order.delivery_date|safe }}',
+                            '{{ order.address|safe }}', 
+                            '{{ order.city|safe }}')">
+        <td><span>{{ order.customer_name }}</span></td>
+        <td><span>{{ order.phonenumber }}</span></td>
+        <td><span>{{ order.delivery_date }}</span></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% include "_pagination.html" %}
+<dialog id="dialog-1">
+    <h3><center>Contenuto Ordine</center></h3>
+    <span>Numero di telefono</span>
+    <input id="input-phonenumber" type="text" name="phonenumber">
+    <span>Data consegna</span>
+    <input id="input-delivery_date" type="text" name="delivery_date">
+    <span>Indirizzo</span>
+    <input id="input-address" type="text" name="address">
+    <span>Città</span>
+    <input id="input-city" type="text" name="city">
+    <button class="cancel closeDialog">Annulla</button>
+    <button id="submit" class="submit">Aggiorna</button>
+</dialog>
+
+{% endblock content %}

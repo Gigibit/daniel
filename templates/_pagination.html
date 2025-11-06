@@ -1,0 +1,10 @@
+<div class="pagination-control">
+    <div class="counter">
+        {% for page in items.iter_pages() %}
+            <a class="page-link" href="#">{{ page }}</a>
+        {% endfor %}
+    </div>
+    <button class="paginate left"><i></i><i></i></button>
+    <button class="paginate right"><i></i><i></i></button>
+</div>
+<script   src="static/pagination.js"></script>
