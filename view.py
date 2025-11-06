@@ -20,6 +20,11 @@ with app.app_context():
 def index():
     return render_template('index.html')
 
+
+@app.route('/send-sms')
+def send_sms():
+    return render_template('send_sms.html')
+
 @app.route('/settings')
 def settings():
     global sms_template
