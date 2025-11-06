@@ -1,31 +1,161 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="dashboard">
-    <header class="dashboard__header">
-        <h1 class="dashboard__title">Dashboard</h1>
-        <p class="dashboard__subtitle">Scegli un'azione per gestire gli ordini e gli SMS.</p>
+<section class="notary-dashboard">
+    <header class="notary-dashboard__header">
+        <p class="notary-dashboard__eyebrow">Main menu</p>
+        <h1 class="notary-dashboard__title">Gestione istruttorie notarili</h1>
+        <p class="notary-dashboard__subtitle">Organizza tutte le attività dello studio notarile partendo dalle istruttorie: carica i clienti, raccogli i documenti degli immobili, pianifica gli appuntamenti e gestisci le comunicazioni da un'unica schermata.</p>
     </header>
-    <div class="dashboard__grid">
-        <a class="dashboard-card" href="{{ url_for('send_sms') }}">
-            <div class="dashboard-card__icon" aria-hidden="true">💬</div>
-            <h2 class="dashboard-card__title">Invia SMS</h2>
-            <p class="dashboard-card__description">Carica un file Excel per inviare i reminder ai clienti.</p>
-        </a>
-        <a class="dashboard-card" href="{{ url_for('list_sms') }}">
-            <div class="dashboard-card__icon" aria-hidden="true">📊</div>
-            <h2 class="dashboard-card__title">Report SMS</h2>
-            <p class="dashboard-card__description">Consulta lo storico degli SMS inviati e il loro stato.</p>
-        </a>
-        <a class="dashboard-card" href="{{ url_for('list_orders') }}">
-            <div class="dashboard-card__icon" aria-hidden="true">🗂️</div>
-            <h2 class="dashboard-card__title">Report ordini</h2>
-            <p class="dashboard-card__description">Analizza gli ordini importati e aggiorna i dettagli.</p>
-        </a>
-        <a class="dashboard-card" href="{{ url_for('settings') }}">
-            <div class="dashboard-card__icon" aria-hidden="true">⚙️</div>
-            <h2 class="dashboard-card__title">Impostazioni</h2>
-            <p class="dashboard-card__description">Personalizza il template degli SMS e le preferenze.</p>
-        </a>
+
+    <nav class="notary-tablist" aria-label="Sezioni principali">
+        <a class="notary-tab is-active" href="#istruttorie" data-target="istruttorie">Istruttorie notarili</a>
+        <a class="notary-tab" href="#appuntamenti" data-target="appuntamenti">Prenotazione appuntamenti</a>
+        <a class="notary-tab" href="#comunicazioni" data-target="comunicazioni">Comunicazioni</a>
+    </nav>
+
+    <div class="notary-panels">
+        <section class="notary-panel is-active" id="istruttorie" aria-labelledby="istruttorie-title">
+            <div class="notary-panel__intro">
+                <h2 class="notary-panel__title" id="istruttorie-title">Caricamento clienti e documenti immobiliari</h2>
+                <p class="notary-panel__description">Centralizza la raccolta dei dati delle parti coinvolte e dei documenti relativi agli immobili (visure catastali, agibilità, APE e altro) per mantenere ogni pratica aggiornata.</p>
+            </div>
+            <div class="notary-panel__grid">
+                <article class="notary-card">
+                    <div class="notary-card__icon" aria-hidden="true">👥</div>
+                    <h3 class="notary-card__title">Caricamento clienti</h3>
+                    <p class="notary-card__text">Importa le anagrafiche dei clienti con un file strutturato e assegnale rapidamente alle singole istruttorie.</p>
+                    <ul class="notary-card__list">
+                        <li>Supporto a importazioni Excel/CSV con controlli automatici.</li>
+                        <li>Associazione immediata alle pratiche aperte.</li>
+                        <li>Alert per dati mancanti o duplicati.</li>
+                    </ul>
+                    <a class="notary-card__action" href="{{ url_for('success') }}">Carica schede clienti</a>
+                </article>
+                <article class="notary-card">
+                    <div class="notary-card__icon" aria-hidden="true">🏠</div>
+                    <h3 class="notary-card__title">Documenti degli immobili</h3>
+                    <p class="notary-card__text">Archivia e monitora i documenti tecnici richiesti per ogni atto: visura catastale, documenti di agibilità, APE/ACE, attestazioni urbanistiche e molto altro.</p>
+                    <ul class="notary-card__list">
+                        <li>Checklist personalizzabili per tipologia di immobile.</li>
+                        <li>Stato di avanzamento della documentazione in tempo reale.</li>
+                        <li>Download rapido dei file già caricati.</li>
+                    </ul>
+                    <a class="notary-card__action" href="{{ url_for('list_orders') }}">Consulta pratiche</a>
+                </article>
+                <article class="notary-card notary-card--highlight">
+                    <div class="notary-card__icon" aria-hidden="true">✅</div>
+                    <h3 class="notary-card__title">Controllo avanzamento</h3>
+                    <p class="notary-card__text">Mantieni sotto controllo le scadenze delle istruttorie e genera riepiloghi per i collaboratori.</p>
+                    <ul class="notary-card__list">
+                        <li>Timeline delle attività completate e da completare.</li>
+                        <li>Filtri per priorità, responsabile e tipologia di pratica.</li>
+                        <li>Promemoria automatici verso clienti e tecnici esterni.</li>
+                    </ul>
+                    <a class="notary-card__action" href="{{ url_for('list_sms') }}">Monitora aggiornamenti</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="notary-panel" id="appuntamenti" aria-labelledby="appuntamenti-title">
+            <div class="notary-panel__intro">
+                <h2 class="notary-panel__title" id="appuntamenti-title">Prenotazione appuntamenti</h2>
+                <p class="notary-panel__description">Gestisci il calendario dello studio, coordina la disponibilità del notaio e coinvolgi clienti, agenzie e tecnici con inviti mirati.</p>
+            </div>
+            <div class="notary-panel__grid">
+                <article class="notary-card">
+                    <div class="notary-card__icon" aria-hidden="true">🗓️</div>
+                    <h3 class="notary-card__title">Agenda condivisa</h3>
+                    <p class="notary-card__text">Visualizza gli slot liberi, blocca le sale riunioni e collega ogni appuntamento all'istruttoria corrispondente.</p>
+                    <ul class="notary-card__list">
+                        <li>Calendario sincronizzato con gli account di posta.</li>
+                        <li>Note operative e checklist per ogni incontro.</li>
+                        <li>Gestione delle priorità e dei reminder automatici.</li>
+                    </ul>
+                </article>
+                <article class="notary-card">
+                    <div class="notary-card__icon" aria-hidden="true">🤝</div>
+                    <h3 class="notary-card__title">Coordinamento partecipanti</h3>
+                    <p class="notary-card__text">Invia conferme personalizzate con allegati utili, raccogli feedback e aggiorna in tempo reale tutti i soggetti coinvolti.</p>
+                    <ul class="notary-card__list">
+                        <li>Gestione multi-parte per clienti, banche e mediatori.</li>
+                        <li>Conferme via email/SMS e link diretti alla documentazione.</li>
+                        <li>Storico delle variazioni e degli esiti.</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="notary-panel__cta">
+                <a class="notary-card__action" href="{{ url_for('index') }}#istruttorie">Torna alla preparazione pratica</a>
+            </div>
+        </section>
+
+        <section class="notary-panel" id="comunicazioni" aria-labelledby="comunicazioni-title">
+            <div class="notary-panel__intro">
+                <h2 class="notary-panel__title" id="comunicazioni-title">Comunicazioni</h2>
+                <p class="notary-panel__description">Informazioni sempre aggiornate verso clienti, banche e professionisti. Utilizza modelli preimpostati per accelerare le notifiche.</p>
+            </div>
+            <div class="notary-panel__grid">
+                <article class="notary-card">
+                    <div class="notary-card__icon" aria-hidden="true">💬</div>
+                    <h3 class="notary-card__title">Messaggistica immediata</h3>
+                    <p class="notary-card__text">Programma e invia SMS di promemoria o aggiornamento direttamente dalle pratiche.</p>
+                    <ul class="notary-card__list">
+                        <li>Template configurabili per stato pratica e tipologia documento.</li>
+                        <li>Storico completo delle comunicazioni inviate.</li>
+                        <li>Monitoraggio consegna con reportistica dedicata.</li>
+                    </ul>
+                    <a class="notary-card__action" href="{{ url_for('send_sms') }}">Invia un SMS</a>
+                </article>
+                <article class="notary-card">
+                    <div class="notary-card__icon" aria-hidden="true">📑</div>
+                    <h3 class="notary-card__title">Report e verbali</h3>
+                    <p class="notary-card__text">Genera riepiloghi condivisibili con il notaio e i collaboratori per tracciare le attività concluse.</p>
+                    <ul class="notary-card__list">
+                        <li>Esportazione in PDF dei registri comunicazioni.</li>
+                        <li>Storico note interne e follow-up programmati.</li>
+                        <li>Filtri avanzati per pratica, cliente o referente.</li>
+                    </ul>
+                    <a class="notary-card__action" href="{{ url_for('list_sms') }}">Consulta report</a>
+                </article>
+            </div>
+            <div class="notary-panel__cta">
+                <a class="notary-card__action" href="{{ url_for('settings') }}">Configura template comunicazioni</a>
+            </div>
+        </section>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.notary-tab');
+        const panels = document.querySelectorAll('.notary-panel');
+
+        const setActiveTab = (hash) => {
+            let targetId = hash ? hash.replace('#', '') : panels[0]?.id;
+
+            if (!targetId || !document.getElementById(targetId)) {
+                targetId = panels[0]?.id;
+            }
+
+            tabs.forEach((tab) => {
+                const tabTarget = tab.dataset.target;
+                tab.classList.toggle('is-active', tabTarget === targetId);
+            });
+
+            panels.forEach((panel) => {
+                panel.classList.toggle('is-active', panel.id === targetId);
+            });
+        };
+
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', (event) => {
+                const target = tab.getAttribute('href');
+                setActiveTab(target);
+            });
+        });
+
+        window.addEventListener('hashchange', () => setActiveTab(window.location.hash));
+
+        setActiveTab(window.location.hash);
+    });
+</script>
 {% endblock content %}
