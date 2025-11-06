@@ -4,8 +4,10 @@
 
 <div id="menu">
   <ul>
-    <li><a href="{{ url_for('index') }}">dashboard</a></li>
-    <li><a href="{{ url_for('send_sms') }}">send sms</a></li>
+    <li><a href="{{ url_for('index') }}#istruttorie">istruttorie notarili</a></li>
+    <li><a href="{{ url_for('index') }}#appuntamenti">prenotazione appuntamenti</a></li>
+    <li><a href="{{ url_for('index') }}#comunicazioni">comunicazioni</a></li>
+    <li><a href="{{ url_for('send_sms') }}">invio sms</a></li>
     <li><a href="{{ url_for('list_sms') }}">report sms</a></li>
     <li><a href="{{ url_for('list_orders') }}">report ordini</a></li>
     <li><a href="{{ url_for('settings') }}">impostazioni</a></li>
